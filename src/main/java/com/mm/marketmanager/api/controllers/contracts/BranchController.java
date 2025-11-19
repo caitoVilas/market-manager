@@ -1,8 +1,7 @@
 package com.mm.marketmanager.api.controllers.contracts;
 
-import com.mm.marketmanager.api.models.requests.ProductRequest;
-import com.mm.marketmanager.api.models.responses.ProductResponse;
-
+import com.mm.marketmanager.api.models.requests.BranchRequest;
+import com.mm.marketmanager.api.models.responses.BranchResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -15,68 +14,67 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controller contract for managing products in the Market Manager application.
- * Provides endpoints for adding, retrieving, updating, and deleting products.
+ * Controller contract for managing branches in the Market Manager application.
+ * Provides endpoints for adding, retrieving, updating, and deleting branches.
  *
  * @author caito
  *
  */
-public interface ProductController {
-
+public interface BranchController {
     @PostMapping()
-    @Operation(description = "Add a new Product")
-    @Parameter(name = "request", description = "Product request object containing details of the product to be added")
+    @Operation(description = "Add a new Branch")
+    @Parameter(name = "request", description = "Branch request object containing details of the branch to be added")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Product added successfully"),
+            @ApiResponse(responseCode = "201", description = "Branch added successfully"),
             @ApiResponse(responseCode = "400", description = "Bad request, invalid input data"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<?> addProduct(@RequestBody ProductRequest request);
+    public ResponseEntity<?> addBranch(@RequestBody BranchRequest request);
 
     @GetMapping
     @SecurityRequirement(name = "security token")
-    @Operation(description = "Retrieve all Products")
+    @Operation(description = "Retrieve all Branches")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Products retrieved successfully"),
+            @ApiResponse(responseCode = "200", description = "Branch retrieved successfully"),
             @ApiResponse(responseCode = "204", description = "No content"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<List<ProductResponse>> getAllProducts();
+    public ResponseEntity<List<BranchResponse>> getAllBranches();
 
     @GetMapping("/{id}")
     @SecurityRequirement(name = "security token")
-    @Operation(description = "Retrieve Product by ID")
-    @Parameter(name = "id", description = "Id of Product")
+    @Operation(description = "Retrieve Branch by ID")
+    @Parameter(name = "id", description = "Id of Branch")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Product retrieved successfully"),
+            @ApiResponse(responseCode = "200", description = "Branch retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id);
+    public ResponseEntity<BranchResponse> getBranch(@PathVariable Long id);
 
     @PutMapping("/update/{id}")
     @SecurityRequirement(name = "security token")
-    @Operation(description = "Update an existing Product")
+    @Operation(description = "Update an existing Branch")
     @Parameters({
-            @Parameter(name = "id", description = "ID of the Product to update"),
-            @Parameter(name = "request", description = "fields of Products")
+            @Parameter(name = "id", description = "ID of the Branch to update"),
+            @Parameter(name = "request", description = "fields of Branch")
     })
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Product updated successfully"),
+            @ApiResponse(responseCode = "200", description = "Branch updated successfully"),
             @ApiResponse(responseCode = "404", description = "Not found"),
             @ApiResponse(responseCode = "400", description = "Bad request, invalid input data"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<ProductResponse> updateProduct(@PathVariable Long id, @RequestBody ProductRequest request);
+    public ResponseEntity<BranchResponse> updateBranch(@PathVariable Long id, @RequestBody BranchRequest request);
 
     @DeleteMapping("/{id}")
     @SecurityRequirement(name = "security token")
-    @Operation(description = "Delete an existing Product")
-    @Parameter(name = "id", description = "ID of the Product to delete")
+    @Operation(description = "Delete an existing Branch")
+    @Parameter(name = "id", description = "ID of the Branch to delete")
     @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Product deleted successfully"),
+            @ApiResponse(responseCode = "204", description = "Branch deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Not found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<?> deleteProduct(@PathVariable Long id);
+    public ResponseEntity<?> deleteBranch(@PathVariable Long id);
 }
